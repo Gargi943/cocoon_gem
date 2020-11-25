@@ -1,0 +1,30 @@
+<p>
+  <strong>name:</strong>
+  <%= @author.name %>
+</p>
+<%= link_to 'Back', authors_path %>
+<%= link_to 'edit', edit_author_path %>
+
+
+<h2>Books</h2>
+<% @author.books.each do |book| %>
+  <p>
+    <strong>title</strong>
+    <%= book.title %>
+    <%= link_to 'Destroy book', [book.author, book], method: :delete, data: { confirm: 'Are you sure?' }%>
+  </p>
+
+<% end %>
+
+
+<h2>Add a Book:</h2>
+<%= form_with(model: [ @author, @author.books.build ], local: true) do |form| %>
+
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
